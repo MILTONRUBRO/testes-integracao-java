@@ -43,6 +43,14 @@ class UsuarioDaoTest {
 		assertThrows(NoResultException.class, () -> this.dao.buscarPorUsername("daenerys"));
 	}
 	
+	@Test
+	void deveriaRemoverUmUsuario() {
+		Usuario usuario = criarUsuario();
+		dao.deletar(usuario);
+		assertThrows(NoResultException.class, () -> this.dao.buscarPorUsername(usuario.getNome()));
+
+	}
+	
 	public Usuario criarUsuario() {
 		Usuario usuario = new  Usuario("arya", "arya@email.com", "12345678");
 		em.persist(usuario);
