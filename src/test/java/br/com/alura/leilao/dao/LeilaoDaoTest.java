@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 import br.com.alura.leilao.model.Leilao;
 import br.com.alura.leilao.model.Usuario;
 import br.com.alura.leilao.util.JPAUtil;
+import br.com.alura.leilao.util.LeilaoBuilder;
+import br.com.alura.leilao.util.UsuarioBuilder;
 
 class LeilaoDaoTest {
 	
@@ -47,6 +49,17 @@ class LeilaoDaoTest {
 	void deveriaAtualizarUmLeilao() {
 		Usuario usuario = criarUsuario();
 		Leilao leilao = criarLeilao(usuario);
+		
+		Leilao leilao2 = new LeilaoBuilder()
+				.comNome("Mochila")
+				.comValorInicial("500")
+				.comData(LocalDate.now())
+				.comUsuario(new UsuarioBuilder()
+						.comNome("Fulano")
+						.comEmail("fulano@email.com")
+						.comSenha("1234678")
+						.criar())
+				.criar();
 		
 		leilao.setNome("Smartphone");
 		leilao.setValorInicial(new BigDecimal("1000"));
